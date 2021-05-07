@@ -1,0 +1,80 @@
+1,传入一个对象的所有财产{
+	post: {
+	  id: 1,
+	  title: 'My Journey with Vue'
+	}
+	<blog-post v-bind="post"></blog-post>
+	等于：
+	<blog-post
+	  v-bind:id="post.id"
+	  v-bind:title="post.title"
+	></blog-post>
+}
+2，插件插槽{
+	1，插槽内可以包含任何模板代码，包括 HTML
+	2，父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。
+	3，后备内容{
+		例如在一个 <submit-button> 组件中：{
+			<button type="submit">
+			  <slot>Submit</slot>
+			</button>
+		}
+		使用 <submit-button> 并且不提供任何插槽内容时，后备内容“Submit”将会被渲染
+	}
+}
+3，多个插槽{
+	1，<slot> 元素有一个特殊的 attribute：name 用来定义额外的插槽
+	2，在一个 <template> 元素上使用 v-slot 指令
+	3，如：组件<base-layout>为{
+		<header>
+		    <!-- 我们希望把页头放这里 --><header>
+			<slot name="header"></slot>
+		</header>
+	}组件使用{
+		<base-layout>
+			 <template v-slot:header>
+			    <h1>Here might be a page title</h1>
+			  </template>
+		<base-layout/>
+	}
+	4，注意 v-slot 只能添加在 <template> 上
+	5,插槽内容能访问子组件中才有的数据{
+		1，如{
+			将 user 作为 <slot> 元素的一个 attribute 绑定上去
+			<span>
+			  <slot v-bind:user="user">
+			    {{ user.lastName }}
+			  </slot>
+			</span>
+			使用带值的 v-slot 来定义我们提供的插槽 prop 的名字
+			<current-user>
+			  <template v-slot:default="slotProps">
+			    {{ slotProps.user.firstName }}
+			  </template>
+			</current-user>
+		}
+		2，当被提供的内容只有默认插槽时，组件的标签才可以被当作插槽的模板来使用{
+			如 <current-user v-slot:default="slotProps">
+			还可更简写如 <current-user v-slot="slotProps">
+		}
+		3，只要出现多个插槽，请始终为所有的插槽使用完整的基于 <template> 的语法如{
+			<template v-slot:default="slotProps">
+			    {{ slotProps.user.firstName }}
+			 </template>
+			
+			 <template v-slot:other="otherSlotProps">
+			    ...
+			 </template>
+		}
+		4，动态指令参数也可以用在 v-slot{
+			如<template v-slot:[dynamicSlotName]>
+		}
+		5，v-slot缩写，例如 v-slot:header 可以被重写为 #header：
+		6，有时需要，避免反复重渲染  使用<keep-alive>{
+			<!-- 失活的组件将会被缓存！-->
+			<keep-alive>
+			  <component v-bind:is="currentTabComponent"></component>
+			</keep-alive>
+		}
+	}
+}

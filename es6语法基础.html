@@ -1,0 +1,696 @@
+<script>
+	{
+		/*
+			let
+			 1,变量不可以重复声明
+			 2，不存在变量提升
+			 3，块级作用域：不可以在作用域外向内找，可以在内向外找
+		*/
+		/*
+		const
+			1,变量必须附上初始值，声明后不可修改
+			2，一般常量用大写命名（潜规则）
+			3，块级作用域：不可以在作用域外向内找，可以在内向外找
+			4，对数组和对象的元素修改不算作对常量的修改，不报错
+	   */
+	}
+
+	{
+		//解构赋值
+
+		//对数组的解构
+			/* const AR = [1,2,3,4]
+			let [one,tow,three] = AR
+			console.log(one)
+			console.log(tow) */
+
+		//对对象的解构,注意对象属性名需要一致
+		/* const obj = {
+			name:"赵本山",
+			age:"不详",
+			xiaopin:function(){
+				console.log("杨小青")}
+			}
+		let {name,age,xiaopin} = obj;
+		console.log(name)
+		console.log(age)
+		console.log(xiaopin) */
+		//可以单独解构
+		/* let {xiaopin} = obj;
+		console.log(xiaopin) */
+	}
+
+	{
+		//声明字符串的方式：反引号
+
+		/* let str1=`woshi`
+		console.log(str1) */
+
+		//1,内容中可以直接出现换行符
+		/* let str2 = `123
+		456
+		789`
+		console.log(str2) */
+
+		//变量拼接
+		/* let str3 = "我是"
+		let str4 = $(str3）`邓俊杰`
+		console.log(str4) */
+	} {
+		//对象的简化写法
+
+		/* let str1 = "邓俊杰"
+		let chage = function(){
+			console.log("我i在")
+		}
+		const obj = {
+			str1,//相当于str1:ste1
+			chage//相当于chage:chage
+		}
+		console.log(obj) */
+
+		//可以简化函数的写法,不需要function
+		/* const obj1 = {
+			chage1(){
+				console.log("我i在")
+			}
+		}
+		obj1.chage1() */
+	}
+
+	{
+		//箭头函数
+		//格式：let fun =()=>{}
+
+		//1,箭头函数的this是静态的，始终指向函数 声明时 所在的this的值
+		//2，箭头函数不可作为构造函数实例化对象
+		//3，不可以使用arguments变量,arguments表示传递的参数，形参
+		/* let test = function(){
+			console.log(arguments)
+		}
+		test(1,2,3)
+		let test2 = ()=>{
+			console.log(arguments)
+		}
+		test2(1,2,3) */
+		//4，箭头函数简写
+		//1,括号简写，有且只有一个形参的时候
+		/* let test3 = a =>{
+			console.log(a)
+		}
+		test3(123) */
+		//2,花括号简写，代码体只有一条语句的时候,rturn必须省略，函数的执行结果就是函数的返回值
+		/* let test4 = a => a*3
+		console.log(test4(123)) */
+	} {
+		//1,形参初始值，初始值一般要靠后
+		/* var test = (a,b,c=10) => a+b+c
+		console.log(test(1,2,3))
+		console.log(test(1,2,)) */
+
+		//2,与解构赋值一起用
+		/* function test({name,age,nan="ling"}){
+			console.log(name)
+			console.log(age)
+			console.log(nan)
+		}
+		test({   //运行函数
+			name:'dengjunjie',
+			age:'123',
+		}) */
+	} {
+		//es6引入rest用于代替arguments,
+		/* function fn(...abc){
+			console.log(abc)
+		}
+		fn(1,2,3,4) */
+		//rest参数必须放在最后
+		/* function fn1(a,b,...abc){
+			console.log(a+b)
+			console.log(abc)
+		}
+		fn1(1,2,3,4) */
+	} {
+		//1，扩展运算符可以将[数组]转换成逗号分隔的 参数序列
+		/* const ay1 = ['梨花','桃花','菊花']
+		function test(){
+			console.log(arguments);
+		} 
+		test(...ay1) */
+		//2，扩展运算符可以合并数组
+		/* const ay2 = ['123','234','567']
+		const ay3 = [...ay1,...ay2]
+		console.log(ay3) */
+		//3，将伪数组转换成数组
+		/* const divs = document.querySelectorAll('div') //复制找个hrml测试
+		console.log(divs)
+		divs2=[...divs]
+		console.log(divs2) */
+	} {
+		//Symbol是第四种数据，
+		//1,创建方法,这种方法创建的Symbol值是唯一的隐藏值是不同的
+		/* let sy1 = Symbol('woshi')
+		let sy2 = Symbol('woshi')
+		console.log(typeof sy1, sy1 === sy2) */
+
+		//2，创建方法Symbol.for(),首先会在全局搜索被登记的 Symbol 中是否有该字符串参数作为名称的 Symbol 值，
+		//如果有即返回该 Symbol 值，若没有则新建并返回一个以该字符串参数为名称的 Symbol 值，并登记在全局环境中供搜索。
+		/* let sy3 = Symbol.for('woshi')
+		let sy4 = Symbol.for('woshi')
+		console.log(typeof sy3, sy3 === sy4) */
+
+		//3,Symbol不能与其他数据进行运算
+		//4.实例：向一个未知对象添加方法
+		/* const obj1 = {
+			fun1:function(){ console.log("我是方法一") }
+		}
+		const obj2 ={
+			fun1:Symbol()
+		}
+		obj1[obj2.fun1] = function(){ console.log("我是方法1.1") }
+		obj1.fun1()
+		console.log(obj1)
+		obj1[obj2.fun1]()//调用函数 */
+
+		//第二种方法 : 向一个未知对象添加方法
+		/* const obj1 = {
+			fun1:function(){ console.log("我是方法一") },
+			[Symbol("fun1")]:function(){ console.log("我是方法1.1") },
+			[Symbol("fun2")]:function(){ console.log("我是方法2") }
+		}
+		let use = Object.getOwnPropertySymbols(obj1)//调用属性的第一种方法
+		obj1[use[0]]()
+		obj1[use[1]]()
+		
+		let use1 = Reflect.ownKeys(obj1)//调用属性的第一种方法，注意数组顺序
+		obj1[use1[1]]()
+		obj1[use1[2]]() */
+		//Symbol有内置属性，这里没有演示
+	} {
+		{
+			//使用for of遍历
+			/* const ar1 = ['让出','得分2','得分3','得分4']
+			for(let i of ar1){  //of 遍历i保存的是键值
+				console.log(i)
+			}
+			for(let i in ar1){  //of 遍历i保存的是键名
+				console.log(i)
+			} */
+			//原理
+			//1，需要对象原生具备iterator接口,iterator是对象中的属性
+			/* let test =ar1[Symbol.iterator]();
+			console.log(test)
+			//2，for of会创建一个指针对象，指向数据解构的初始位置
+			//3，第一次调用对象内的next方法，指针指向下一位，直到最后一位成员
+			//4，每次调用next方法都会返回一个包含value和done的对象
+			console.log(test.next())
+			console.log(test.next())
+			console.log(test.next())
+			console.log(test.next())
+			console.log(test.next()) */
+		}
+		{
+			//在对象中使用遍历，
+			/* const obj1 = {
+				name:"dengjunjie",
+				oef:[
+					'dieignne',
+					'saoihohgio',
+					'aiahogihaso',
+					'asogihio'
+				],
+				[Symbol.iterator](){{//自定义iterator
+					let index = 0
+					return {
+						next:()=>{
+							if( index < this.oef.length){
+								let obj = { value :this.oef[index] ,done : false};
+								index ++;
+								return obj;
+								
+							}else{
+								return { value :this.oef[index] ,done : true}
+							}
+						}
+					}
+				}
+			}
+			for(let i of obj1.oef){
+				console.log(i)
+			}
+			for(let i of obj1){//自定义iterator
+				console.log(i)
+			} */
+		}
+	} 
+	{
+		//生成器函数，和promi seyi使用场景一样，封装异步操作，故不介绍
+	}
+	{
+		//Promise,是一个构造函数，可以用来封装异步操作，获取其成功或者失败的结果,示例
+		/* let p = new Promise(function(resolve,reject){
+			resolve('成功了') //成功调用函数，发送数据到then的第一个函数
+			reject('失败了') //失败调用函数，发送数据到then的第二个函数
+		});
+		p.then( function(value){console.log(value)} , function(value){console.log(value)})//成功运行第一个,失败运行第二个 */
+		
+		//.then方法本省也是一个Promise对象，then的Promise的成功与否取决于里面两个函数里return的Promise成功与否
+		//.如果返回的不是一个Promise，则默认成功，返回值就是成功的值
+		//，所以可以在then后接上then，无限接上，比如
+		/* let p = new Promise(function(resolve,reject){
+			setTimeout(()=>{
+				resolve('成功了') //成功调用函数，发送数据到then的第一个函数
+				reject('失败了') //失败调用函数，发送数据到then的第二个函数
+			},2000)
+		});
+		p.then(function(value){
+			return new Promise(function(resolve,reject){ //then里函数里的Promise成功与否决定下一个then运行哪个函数
+				console.log(value)
+				resolve('then成功了') //成功调用函数，发送数据到then的第一个函数
+				reject('then失败了') //失败调用函数，发送数据到then的第二个函数
+			});
+		}).then( function(value){console.log(value)} , function(value){console.log(value)}  )
+		console.log('value') */
+		
+	} 
+	{
+		//新的数据结构set（集合），类似于数组，但里面的值都是唯一的。实现了iterator接口，可以使用扩展运算符和for of
+		//set 里面需要接入一个可迭代数据一般为数组， 可以自动去重
+		/* let ar = new Set(['大事','消失','大事','dashi'])
+		console.log(ar)
+		
+		//set的一些属性和方法：
+		//size 返回集合内属性的个数
+		console.log(ar.size)
+		
+		//add 添加一个属性
+		ar.add('nima')
+		console.log(ar)
+		
+		//delete 删除一个属性
+		ar.delete('dashi')
+		console.log(ar)
+		
+		//has 查询是否有这个属性
+		console.log(ar.has('大事')) */
+
+		//应用实例
+		//数组去重
+		/* const ar = [1,2,3,4,5,4,3,2,1] */
+		/* console.log([...new Set(ar)]) */
+		
+		//交集
+		/* const ar1 = [3,4,5,6,7,3,4,5] */
+		/* console.log([...new Set(ar)].filter(item =>  new Set(ar1).has(item) )) */
+		
+		//并集
+		/* console.log([...new Set([...ar,...ar1])]) */
+		
+		//差集
+		/* console.log( !new Set(ar1).has(7) )
+		console.log([...[...new Set(ar)].filter(item =>  !new Set(ar1).has(item) ),...[...new Set(ar1)].filter(item =>  !new Set(ar).has(item) )]) */
+	} {
+		//es6提供了map数据解构,类似于对象,是键值的集合,但键的对象范围包括不限于字符串,比如对象都可以当键,
+		//map实现了iterator接口,可以使用扩展运算符和for of 遍历
+		
+		/* let am = new Map()
+		am.set('name','dengjunjie')//添加元素，参数第一个为键，第二个属性
+		am.set( function(){console.log(this)},'dengjunjie')//键可以放入函数
+		console.log(am)
+		console.log(am.size)//返回元素的个数
+			
+		console.log(am.get('name'))//返回键名对象的键值，
+		const obj = {1:'dengjunjie'}
+		am.set(obj,'dengjunjie')
+		console.log(am.get(obj))//可以传入对象类型的key，找出值
+			
+		am.delete('name')//删除
+		console.log(am) */
+
+		/* am.clear()//清空
+		console.log(am) */
+
+		/* for(let v of am){ console.log(v) }//遍历 */
+	} 
+	{
+		//class让对象原型写法更加简洁，本质上是es5对象原型写法的语法糖
+		//es5演示
+		/* function shouji(name,jiage){
+			this.jiage=jiage
+			this.name=name
+		}
+		shouji.prototype.call=function(){
+			console.log('打电话')
+		}
+		let huawei =new shouji('huawei',5999)
+		console.log(shouji)
+		//class演示
+		class phone{
+			constructor(name,jiage) {
+			    this.jiage=jiage
+			    this.name=name
+			}
+			shouji(){
+				console.log('打电话')
+			}
+		}
+		let huawei2 = new phone('huawei',5999)
+		console.log(huawei2) */
+		
+		//静态对象,以函数对象定义的属性与实例化对象是不相通的，和构造函数的原型对象是通的
+		/* function test(){ this.abc1='asdiohaoifgh'}
+		test.abc='asdiohaoifgh' //以函数对象定义的属性为静态成员
+		test.prototype.abc2 = 'asdioghaoigh'//定义函数原型对象里的属性
+		let testobj = new test()
+		console.log(testobj.abc)
+		console.log(testobj.abc1)
+		console.log(testobj.abc2) */
+
+		//class定义静态属性
+		/* class test1{
+			static abc = "aoihfgaoihgoiah"
+		}
+		let test2obj = new test1
+		console.log(test2obj.abc) */
+
+		//构造函数的继承
+		//es5演示
+		/* function shouji(name,age){
+			this.name = name
+			this.age = age
+		}
+		shouji.prototype.call=function(){console.log('yunxing')}
+			
+		function shouji1(name,age,cols){
+			shouji.call(this,name,age)//call可以在对象上使用其他对象上的方法，第一个参数为this的指向
+		}
+		shouji1.prototype = new shouji;//字迹对象上就会有父集的方法
+		shouji1.prototype.constructor = shouji1 //矫正
+			
+		let test = new shouji1('各个','哦i阿萨的规范化')
+		console.log(test)
+		test.call() */
+
+		//es6演示
+		/* class shouji{
+			constructor(name,age) {
+				this.name = name
+				this.age = age
+			}
+			call(){console.log('yunxing')}
+		}
+		class shouji1 extends shouji{ //extends可以引入父级
+			constructor(anme,age,nex) {
+			    super(name,age)//super代表的是父集的constructor
+				this.nex=nex
+			}
+			call(){
+				super.call()//子类可以使用super.加父类方法方法，来调用父类方法！！！！！！！！！！！！！！
+				console.log('asofghaoisghaoighawe')
+			}
+			call2(){console.log('yunxing')}
+		}
+		let test = new shouji1('dengjunjie',1234,12343)
+		console.log(test)
+		test.call() */
+
+		//get
+		/* class test{
+			get pric(){ //当外部调用该pric属性时会运行函数内代码，属性的值便是该函数返回的值
+				console.log('测试以')
+				return '属性的值'
+			}
+			set pric(vals){  //当pric属性值被修改时就会运行该函数，set 定义的方法必须有形参，传递的时修改的值
+				console.log('已经修改')
+				console.log(vals)
+			}
+		}
+		let testobj = new test
+		console.log( testobj.pric )//打印该属性值
+		testobj.pric="dengjunjie" */
+	} {
+		//数值扩展
+		//Number.EPSILON表示js里的最小精度,时Number里的一个属性，一般用于小数的对比
+		/* console.log(0.1+0.2 === 0.3) //false 0.300000000004
+		function equal(a,b){
+			if(a-b < Number.EPSILON || b-a < Number.EPSILON){
+				return true
+			}else{
+				return false
+			}
+		}
+		console.log(equal(0.1+0.2,0.3)) */
+		
+		//二进制到16进制
+		/* console.log( 0b1010 )//二进制0b
+		console.log( 0o1010 )//八进制0o
+		console.log( 0x1010 )//十六进制0x */
+		
+		//Number.isFinite()检测一个数是否为有限数
+		/* console.log( Number.isFinite( 100 ) )
+		console.log( Number.isFinite( 100/0 ) )//除不尽 false */
+		
+		//Number.isNaN()检测一个数是否为数值
+		/* console.log( Number.isNaN(123) ) */
+		
+		//Number.parseInt()字符串转成整数字Number.parseFloat()(浮点),数字要放在字符串前面
+		/* console.log( Number.parseInt("1234.3345love") )
+		console.log( Number.parseFloat("1234.1dengjuagioh") ) */
+		
+		//Math.trunc()将数字小数点后抹掉
+		/* console.log( Math.trunc(10.123) ) */
+		
+		//Math.sign()判断一个数是正数负数还是零
+		/* console.log( Math.sign(0) )
+		console.log( Math.sign(234) )
+		console.log( Math.sign(-1234) ) */
+	}
+</script>
+<!-- <script type="module">//需要在模块内使用模块语句
+	
+	//es6模块化语法
+	//export用于规定模块的对外接口
+	
+	//import用于输入其他模块提供的功能
+	//第一种引入* as表示将其他模块提供的功能放入到一个对象当中
+	import * as try1 from "./测试模块暴露/m1.js" 
+	console.log(try1)
+	import * as try2 from "./测试模块暴露/m2.js"
+	console.log(try2)
+	import * as try3 from "./测试模块暴露/m3.js"
+	console.log(try3)
+	
+	//第二种，解构赋值形式
+	import {test,test2} from "./测试模块暴露/m1.js" //可以直接使用属性
+	test2()//可以直接使用属性
+	import {test as tty,test2 as tty2} from "./测试模块暴露/m2.js"
+	tty2()//引入属性同名时转换名字
+	
+	//第三直接暴露
+	import try4 from "./测试模块暴露/m3.js" //需要在m3定义default
+	console.log(try4)
+	try4.test2()
+</script> -->
+<!-- 使用模块的方式二，用标签引入，名名为app.js -->
+<!-- <script src="测试模块暴露/app.js" type="module"></script> -->
+<script type="text/javascript">
+	{
+		//es7新特性
+		//Array.prototype.includes()用来检测数组种是否包含某个元素
+		/* const arr = ['等级你姐','u爱国发哈','奥i回家啊']
+		console.log(arr.includes('奥i回家啊')) */
+		
+		//指数操作符**
+		/* console.log( 2 ** 10 )//二的十次方 */
+	}
+	{
+		//es8新特性
+		//async函数：函数返回结果是一个promise函数
+		async function fn(){
+			//return '非promise成功'//返回非promise函数，其返回结果的promise为成功
+			//throw new Error('出错啦')//抛出错误，其返回结果的promise为失败
+			return new Promise((resole,reject)=>{
+				//resole('成功')//成功运行函数
+				reject('失败')//失败运行函数
+			})
+		}
+		let test = fn()
+		console.log(test)
+		//调用then方法
+		test.then((value)=>{
+			console.log(value)
+		},(reason)=>{
+			console.log(reason)
+		})
+		
+		//await
+		//await必须在asyne函数种
+		//await右侧的表达式一般是promise对象
+		//await返回的是promise成功的值
+		//await的promise失败了，会抛出异常，需要通过try..catch捕获异常
+		/* async function fn(){
+			try{
+				let test = await new Promise((resole,reject)=>{//一般promise在外面
+					resole('成功')
+					reject('失败')
+				})
+				console.log(test)//await返回的是promise成功的值
+			}catch(a){
+				console.log(a)
+			}
+		}
+		fn() */
+		
+		
+		//对象方法扩展
+		/* const school = {
+			name:'dengjunjie',
+			cities:['beijing','shanghai','guangzhou'],
+			xueke:['qianduan','java','dashuju']
+		}
+		//获取对象所有的键到一个数组
+		console.log(Object.keys(school))
+		//获取对象所有的值到一个数组
+		console.log(Object.values(school))
+		//获取对象所有的属性到一个数组，数组中套数组，数组第一个是键，第二个是值
+		//可以方便创建map
+		console.log(Object.entries(school))
+		const abc = new Map(Object.entries(school))
+		console.log(abc.get('name'))
+		//可以返回一个对象属性的描述对象
+		console.log(object.getOwnPropertyDescriptor(school)) */
+	}
+	{
+		//es9新特性
+		//es9中为对象提供了像数组一样的rest参数和扩展运算符
+		/* function test({name,lest,...user}){
+			console.log(name)
+			console.log(user)
+			console.log(user.tang)
+		}
+		test({
+			name:'dengjunie',
+			lest:'libai',
+			tang:'dupu',
+			yuan:'yuanshukai'
+		}) */
+		//对象的合并
+		//相同键值会被后面的覆盖
+		/* const obj1 = { 
+			name:'dengjunie',
+			lest:'libai',
+		}
+		const obj2 = {
+			lest:'li',
+			tang:'dupu',
+			yuan:'yuanshukai'
+		}
+		const obj3 = { ...obj1,...obj2 }//...obj1会把对象变成没有大括号的数据
+		console.log(obj3) */
+	}
+	{
+		//es10新特性
+		//对象扩展方法Object.fromEntries可以将数组创建成对象
+		/* const obj = Object.fromEntries([
+			['name','邓俊杰'],
+			['class','dieiidie']
+		])
+		console.log(obj) */
+		//字符串扩展方法
+		/* let str = '     dfhiuhadgohi      '
+		console.log(str.trimStart())//清除开始空白
+		console.log(str.trimEnd())//清除结束空白 */
+		//将多维数组转化为低维数组flat()
+		/* const arr = [1,2,3,4,[5,6,7,8,[9,234]]]
+		console.log(arr.flat(2))//形参表示转化的深度 */
+		//Symbol.prototype.description扩展方法，用于获取symbol的描述字符串
+		/* let s = Symbol('dengjunjie')
+		console.log(s.description) */
+	}
+	{
+		//私有属性
+		/* class test { 
+			//公有属性
+			name;
+			//私有属性 前面加#
+			#age;
+			#weight;
+			constructor(name,age,weight){
+				this.name = name;
+				this.#age = age;
+				this.#weight = weight;
+ 			}
+			inde(){
+				console.log(girl.name)
+				console.log(girl.#age)
+				console.log(girl.#weight)
+			}
+		}
+		const girl = new test('dengjunjie',5,123456)
+		console.log(girl)
+		console.log(girl.name)
+		console.log(girl.#age)//报错，外部无法访问
+		console.log(girl.#weight)//报错，外部无法访问
+		girl.inde()//内部访问不报错 */
+	}
+	{
+		//es11新特性
+		//promise.allSettled()会返回一个promise对象默认成功
+		/* const test1 = new Promise((resolve,reject)=>{
+			setTimeout(()=>{
+				reject('失败了')
+			})
+		})
+		const test2 = new Promise((resolve,reject)=>{
+			setTimeout(()=>{
+				resolve('成功了')
+			})
+		})
+		const txt = Promise.allSettled([test1,test2]);
+		console.log(txt)
+		//all其中一个Promise失败该函数返回的Promise为失败
+		const txt = Promise.all([test1,test2]);
+		console.log(txt) */
+		
+		//可选链操作符？.
+		//判断是否有参数才执行下一步，如果没有参数则返回undefined
+		/* function test(obj){
+			let txt = obj?.aa?.bb//如果没有参数则返回undefined
+			console.log(txt)
+		}
+		const obj = {
+			aa:{
+				//bb:'bb', 
+				cc:'cc'
+			},
+			11:{
+				22:22,
+				33:33
+			}
+		}
+		test(obj) */
+		//绝对全局对象
+		/* console.log(globalThis)//在浏览器中始终指向window */
+		//BigIng大整型一般用于大数字运算,只能定义整数  定义：
+		/* let int = 123n
+		console.log(int, typeof int)
+		//函数定义
+		console.log(BigInt(int))
+		
+		//大数值运算
+		let max = Number.MAX_SAFE_INTEGER//js里表示最大数值
+		console.log(max+1)
+		console.log(max+2)//不正确
+		console.log(BigInt(max)+2n)// */
+		
+		
+	}
+</script>
+
+<html><!-- 动态import -->
+	<body>
+		<button id='bun1'></button>
+		<!-- 动态import可以实现import懒加载，在需要的时候调用 -->
+		<script src="./测试模块暴露/app1.js" type="module"></script>
+	</body>
+</html>

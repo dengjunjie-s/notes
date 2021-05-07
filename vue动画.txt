@@ -1,0 +1,66 @@
+一，将需要动画化的元素放在<transition name="slide-fade">元素内，name为动画名
+二，定义动画样式{
+	定义动画名后，v换为动画名
+	1，进入动画{
+		v-enter：动画开始前样式
+		v-enter-to：动画结束后样式
+		v-enter-active：动画进入过渡生效时的状态样式，一般定义动画时间如{transition: opacity .5s;}
+	}
+	2，离开动画{
+		1,v-leave：动画开始前样式
+		2,v-leave-to：动画结束后样式
+		3,v-leave-active：动画进入过渡生效时的状态样式，一般定义动画时间如{transition: opacity .5s;}
+	}
+}
+三，过度动画{
+	1,如{
+		/* 定义动画过渡的，属性，时间，速度曲线，停顿时间 */
+		.slide-fade-enter-active {
+		  transition: all .3s ease;
+		}
+		/* 定义动画过度样式 */
+		.slide-fade-enter, .slide-fade-leave-to{
+		  transform: translateX(10px);
+		  opacity: 0;
+		}
+	}
+		
+}
+四,css动画{
+	1,animation：动画名称 动画播放时间 速度曲线 停顿时间
+	2,如{
+		
+		/* 定义动画名称 动画播放时间 速度曲线 停顿时间 */
+		.bounce-enter-active {
+		  animation: bounce-in .5s;
+		}
+		
+		/* 定义动画 */
+		@keyframes bounce-in {
+		  0% {
+		    transform: scale(0);
+		  }
+		  50% {
+		    transform: scale(1.5);
+		  }
+		  100% {
+		    transform: scale(1);
+		  }
+		}
+	}
+}
+五，链接外部动画库{
+	1，如{
+		/* 引入外部动画库 */
+		<link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+		
+		/* 使用引入动画样式 */
+		 <transition
+		    enter-active-class="animated tada"
+		    leave-active-class="animated bounceOutRight"
+		  >
+		    <p v-if="show">hello</p>
+		  </transition>
+	}
+	2,自定义过度类名如{ enter-active-class="animated tada"}
+}

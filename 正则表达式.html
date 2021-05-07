@@ -1,0 +1,15 @@
+<script>
+	//  https://regex101.com/   表达式测试工具
+	//限定符
+	// ？ 代表前面这个字符出现0次或者1次
+	let txt = `
+		ac
+		abc
+		abbbbbbbc
+		adc
+		addddddc
+	`
+	let test = /ab?c/
+	console.log(test.exec(txt))
+	
+</script>

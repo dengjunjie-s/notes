@@ -1,0 +1,113 @@
+1，边框{
+	1，圆角border-radius{
+		完整格式 border-radius:1px 1px 1px 1px / 1px 1px 1px 1px;
+	}
+	2，阴影box-shadow{
+		1,完整格式 box-shadow: 10px 10px 5px #888888 , 10px 10px 5px #888888;
+		2,加逗号添加第二个阴影
+		3，值为（ 水平  垂直  模糊度 颜色 ）
+	}
+	3，图片边框border-image{
+		1,完整格式 border-image:url(border.png) 30 30 round;
+		2，值为（ 链接 水平剪切  垂直  重复方式 ）
+		3，重复方式 round图像平铺（重复） stretch拉伸填补
+	}
+}
+2，背景{
+	1，background-image{
+		格式background-image: url(img_flwr.gif), url(paper.gif); 
+		逗号隔开，所有的图片中显示在最顶端的为第一张
+		background: url(img_flwr.gif) right bottom no-repeat, url(paper.gif) left top repeat;
+	}
+	2，background-size{
+		百分比大小是相对于父元素的宽度和高度的百分比的大小
+	}
+	3，background-origin{
+		定了背景图像的位置区域
+		content-box, padding-box,和 border-box区域内可以放置背景图像。
+	}
+}
+3，渐变{
+	1，线性渐变{
+		垂直渐变，上到下：background-image: linear-gradient(#e66465, #9198e5);
+		平行渐变，左开始：background-image: linear-gradient(to right, red , yellow);
+		对角渐变，左下开始，background-image: linear-gradient(to bottom right, red, yellow);
+		使用透明度：background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+		重复渐变（百分比为大小）：background-image: repeating-linear-gradient(red, yellow 10%, green 20%);	
+	}
+	2，径向渐变{
+		background-image: radial-gradient(red 5%, yellow 15%, green 60%);
+	}
+}
+4，文字效果{
+	1，文字阴影text-shadow：格式同边框阴影box-shadow
+	2，文字溢出如何显示Text Overflow{
+		text-overflow:ellipsis;显示效果：difehighaigh...
+		text-overflow:clip;超出不显示
+		text-overflow:'>>'自定义字符串，只在火狐有效
+	}
+}
+5，2D转换{
+	1，元素从其当前位置移动，translate(x,y) 方法格式{
+		transform: translate(50px,100px);
+	}
+	2,素顺时针旋转给定的角度。允许负值，rotate()格式：transform: rotate(30deg);
+	3，元素的尺寸会增加或减少，scale()格式：transform: scale(2,4);值为长宽倍率
+	4，元素翻转给定的角度，根据元素（X 轴）（Y 轴）参数skew()格式{
+		transform: skew(30deg,20deg);
+	}
+}
+6，3D转换{
+	rotateX()和rotateY(){
+		1，围绕其在一个给定度数Y轴旋转的元素
+		1，格式transform: rotateY(130deg);
+	}
+}
+7，过度动画{
+	1，transition{
+		多应用于元素和伪类
+		如{
+			1，样式值{
+				1，transition: width 2s;
+				2，transition: width 2s, height 2s, transform 2s;
+			}
+			2，应用{
+				div:hover
+			}
+		}
+		{
+			transition: 属性名 过度时间长度 速度曲线 停顿时间
+		}
+	}
+}
+8，动画{
+	1,当动画完成时，会变回初始的样式
+	例如{
+		
+		1，创建动画{
+			@keyframes myfirst
+			{
+			    from {background: red;}
+			    to {background: yellow;}
+			}
+		}
+		
+		2,应用动画在元素样式上使用{
+			animation:myfirst 5s;
+		}
+		animation：动画名称 动画播放时间 速度曲线 停顿时间
+		
+		3，另一种格式{
+			@keyframes myfirst
+			{
+			    0%   {background: red; left:0px; top:0px;}
+			    25%  {background: yellow; left:200px; top:0px;}
+			    50%  {background: blue; left:200px; top:200px;}
+			    75%  {background: green; left:0px; top:200px;}
+			    100% {background: red; left:0px; top:0px;}
+			}
+		}
+		
+	}
+	
+}
